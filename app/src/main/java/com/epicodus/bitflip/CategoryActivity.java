@@ -29,7 +29,7 @@ public class CategoryActivity extends AppCompatActivity {
         mCategoryList.setAdapter(adapter);
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String category = ((TextView) view).getText().toString();
                 Intent intent = new Intent(CategoryActivity.this, NewItemActivity.class);
                 intent.putExtra("category", category);
