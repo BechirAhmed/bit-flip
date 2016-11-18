@@ -30,7 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="21dp"
-        android:id="@+id/editText4"
+        android:id="@+id/newItemName"
         android:hint="Item" />
 
     <EditText
@@ -39,10 +39,10 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/textView3"
-        android:layout_alignRight="@+id/editText5"
-        android:layout_alignEnd="@+id/editText5"
+        android:layout_alignRight="@+id/newItemDescription"
+        android:layout_alignEnd="@+id/newItemDescription"
         android:layout_marginTop="19dp"
-        android:id="@+id/editText6"
+        android:id="@+id/inputName"
         android:hint="Name" />
 
     <EditText
@@ -50,10 +50,10 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:layout_below="@+id/editText6"
+        android:layout_below="@+id/inputName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editText7"
+        android:id="@+id/inputEmail"
         android:hint="Email" />
 
     <EditText
@@ -61,10 +61,10 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:layout_below="@+id/editText7"
-        android:layout_alignRight="@+id/editText7"
-        android:layout_alignEnd="@+id/editText7"
-        android:id="@+id/editText8"
+        android:layout_below="@+id/inputEmail"
+        android:layout_alignRight="@+id/inputEmail"
+        android:layout_alignEnd="@+id/inputEmail"
+        android:id="@+id/inputPhone"
         android:hint="Phone" />
 
     <EditText
@@ -72,10 +72,10 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/newItemName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editText9"
+        android:id="@+id/newItemPrice"
         android:hint="Price" />
 
     <Button
@@ -91,9 +91,9 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText5"
+        android:id="@+id/newItemDescription"
         android:hint="Description"
-        android:layout_below="@+id/editText9"
+        android:layout_below="@+id/newItemPrice"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -104,7 +104,7 @@
         android:id="@+id/textView3"
         android:textSize="30sp"
         android:textColor="@android:color/black"
-        android:layout_below="@+id/editText5"
+        android:layout_below="@+id/newItemDescription"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp" />
