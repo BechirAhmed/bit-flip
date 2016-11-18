@@ -28,20 +28,19 @@
         android:layout_marginRight="46dp"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="152dp"
-        android:id="@+id/buyButton"
+        android:id="@+id/sellButton"
         android:background="@android:color/holo_green_dark"
-        android:textColor="@android:color/black"
-        android:shadowColor="@android:color/holo_orange_dark" />
+        android:textColor="@android:color/black" />
 
     <Button
         android:text="Buy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/buyButton"
-        android:layout_alignEnd="@+id/buyButton"
+        android:layout_alignRight="@+id/sellButton"
+        android:layout_alignEnd="@+id/sellButton"
         android:layout_marginBottom="42dp"
-        android:id="@+id/sellButton"
+        android:id="@+id/buyButton"
         android:background="@android:color/holo_orange_light" />
 
     <TextView
