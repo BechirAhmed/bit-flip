@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BitFlip</string>
     <string-array name="categories">
+        <item>All</item>
         <item>Clothing</item>
         <item>Tools</item>
         <item>Games</item>
