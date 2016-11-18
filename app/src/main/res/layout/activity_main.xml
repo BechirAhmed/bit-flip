@@ -11,20 +11,50 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/background"
         android:scaleType="centerCrop"
+        android:src="@drawable/background"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/imageView" />
+
+    <Button
+        android:text="Sell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="46dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="152dp"
+        android:id="@+id/buyButton"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/black"
+        android:shadowColor="@android:color/holo_orange_dark" />
+
+    <Button
+        android:text="Buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/buyButton"
+        android:layout_alignEnd="@+id/buyButton"
+        android:layout_marginBottom="42dp"
+        android:id="@+id/sellButton"
+        android:background="@android:color/holo_orange_light" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bit Flip"
         android:textSize="80dp"
+        android:textColor="@android:color/black"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/black" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp" />
 
 </RelativeLayout>
