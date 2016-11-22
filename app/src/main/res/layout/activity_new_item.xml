@@ -106,15 +106,22 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:id="@+id/spinnerCategory" />
+
     <TextView
-        android:text="TextView"
+        android:text="Category:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/newItemCategory"
-        android:textSize="18sp"
-        android:layout_above="@+id/newItemName"
+        android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView6" />
 
 
 </RelativeLayout>
