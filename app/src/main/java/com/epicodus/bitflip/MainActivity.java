@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == mSellButton) {
+            Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
+            startActivity(intent);
+        } else if(v == mBuyButton) {
             Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
             startActivity(intent);
         }
+
     }
 }
