@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,10 +31,7 @@ public class CategoryActivity extends AppCompatActivity {
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String category = ((TextView) view).getText().toString();
-                Intent intent = new Intent(CategoryActivity.this, NewItemActivity.class);
-                intent.putExtra("category", category);
-                startActivity(intent);
+                Toast.makeText(CategoryActivity.this, "You Picked A Category!", Toast.LENGTH_LONG).show();
             }
         });
     }

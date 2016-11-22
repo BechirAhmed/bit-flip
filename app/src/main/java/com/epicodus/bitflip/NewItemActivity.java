@@ -28,16 +28,28 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_new_item);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
-        mNewItemCategory.setText("Category: " + category);
         mNewItemButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v == mNewItemButton) {
-            Toast.makeText(NewItemActivity.this, "Item Saved!", Toast.LENGTH_LONG).show();
+            String newItemDescription = mNewItemDescription.getText().toString();
+            String newItemName = mNewItemName.getText().toString();
+            String newItemPrice = mNewItemPrice.getText().toString();
+            String newItemCategory = mNewItemCategory.getText().toString();
+            String inputName = mInputName.getText().toString();
+            String inputEmail = mInputEmail.getText().toString();
+            String inputPhone = mInputPhone.getText().toString();
+            Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
+            intent.putExtra("itemDescription", newItemDescription);
+            intent.putExtra("itemName", newItemName);
+            intent.putExtra("itemPrice", newItemPrice);
+            intent.putExtra("itemCategory", newItemCategory);
+            intent.putExtra("userName", inputName);
+            intent.putExtra("userEmail", inputEmail);
+            intent.putExtra("userPhone", inputPhone);
+            startActivity(intent);
         }
     }
 }
