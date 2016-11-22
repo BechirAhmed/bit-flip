@@ -36,7 +36,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         if(v == mNewItemButton) {
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
-            int newItemPrice = Integer.parseInt(mNewItemPrice.getText().toString());
+            String newItemPrice = mNewItemPrice.getText().toString();
             String inputName = mInputName.getText().toString();
             String inputEmail = mInputEmail.getText().toString();
             String inputPhone = mInputPhone.getText().toString();
