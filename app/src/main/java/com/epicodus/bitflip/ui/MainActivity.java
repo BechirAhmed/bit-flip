@@ -1,10 +1,12 @@
-package com.epicodus.bitflip;
+package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.epicodus.bitflip.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

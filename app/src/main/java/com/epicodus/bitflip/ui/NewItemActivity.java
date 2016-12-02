@@ -1,4 +1,4 @@
-package com.epicodus.bitflip;
+package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.bitflip.ItemDisplayActivity;
+import com.epicodus.bitflip.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -24,6 +27,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.inputEmail) EditText mInputEmail;
     @Bind(R.id.inputPhone) EditText mInputPhone;
     @Bind(R.id.newItemButton) Button mNewItemButton;
+    @Bind(R.id.comparePricesButton) Button mComparePricesButton;
     private String[] mCategoryArray;
 
     @Override
@@ -36,6 +40,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         mCategoryArray = res.getStringArray(R.array.categories);
 
         mNewItemButton.setOnClickListener(this);
+        mComparePricesButton.setOnClickListener(this);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mCategoryArray);
         mNewItemCategory.setAdapter(adapter);
     }
@@ -56,6 +62,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("userName", inputName);
             intent.putExtra("userEmail", inputEmail);
             intent.putExtra("userPhone", inputPhone);
+            startActivity(intent);
+        } else if(v == mComparePricesButton) {
+            String newItemName = mNewItemName.getText().toString();
+            Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
+            intent.putExtra("itemName", newItemName);
             startActivity(intent);
         }
     }

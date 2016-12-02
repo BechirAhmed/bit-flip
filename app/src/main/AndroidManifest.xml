@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="ui.MainActivity"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +18,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CategoryActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".NewItemActivity" />
-        <activity android:name=".ItemDisplayActivity"></activity>
+            android:name="ui.CategoryActivity"
+            android:parentActivityName="ui.MainActivity" />
+        <activity
+            android:name=".ui.NewItemActivity"
+            android:parentActivityName="ui.MainActivity" />
+        <activity
+            android:name=".ItemDisplayActivity"
+            android:parentActivityName=".ui.NewItemActivity" />
+        <activity
+            android:name=".ui.ComparePricesActivity"
+            android:parentActivityName="ui.NewItemActivity"></activity>
     </application>
 
 </manifest>

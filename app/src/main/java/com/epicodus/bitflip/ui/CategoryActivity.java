@@ -1,4 +1,4 @@
-package com.epicodus.bitflip;
+package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.epicodus.bitflip.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
