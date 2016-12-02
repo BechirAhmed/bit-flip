@@ -5,16 +5,22 @@ package com.epicodus.bitflip.model;
  */
 
 public class Item {
+    private String mCategory;
     private String mName;
     private String mPrice;
     private String mDescription;
     private String mImageUrl;
 
-    public Item(String name, String price, String description, String imageUrl) {
+    public Item(String category, String name, String price, String description, String imageUrl) {
+        this.mCategory = category;
         this.mName = name;
         this.mPrice = price;
         this.mDescription = description;
         this.mImageUrl = imageUrl;
+    }
+
+    public String getCategory() {
+        return mCategory;
     }
 
     public String getName() {
