@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.epicodus.bitflip.R;
 import com.epicodus.bitflip.model.Item;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         }
 
         public void bindItem(Item restaurant) {
+            Picasso.with(mContext).load(restaurant.getImageUrl()).into(mItemImageView);
             mNameTextView.setText(restaurant.getName());
             mCategoryTextView.setText(restaurant.getCategory());
             mPriceTextView.setText("$" + restaurant.getPrice());
