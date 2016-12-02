@@ -1,5 +1,7 @@
 package com.epicodus.bitflip.services;
 
+import android.util.Log;
+
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.model.Item;
 
@@ -54,9 +56,8 @@ public class WalmartService {
                     JSONObject itemJSON = itemsJSON.getJSONObject(i);
                     String name = itemJSON.getString("name");
                     String price = itemJSON.getString("salePrice");
-                    String description = itemJSON.getString("shortDescription");
                     String imageUrl = itemJSON.getString("thumbnailImage");
-                    Item item = new Item(category, name, price, description, imageUrl);
+                    Item item = new Item(category, name, price, imageUrl);
                     items.add(item);
                 }
             }

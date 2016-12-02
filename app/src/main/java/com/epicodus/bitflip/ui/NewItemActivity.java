@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.epicodus.bitflip.ItemDisplayActivity;
+import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
 
 import butterknife.Bind;

@@ -11,11 +11,10 @@ public class Item {
     private String mDescription;
     private String mImageUrl;
 
-    public Item(String category, String name, String price, String description, String imageUrl) {
+    public Item(String category, String name, String price, String imageUrl) {
         this.mCategory = category;
         this.mName = name;
         this.mPrice = price;
-        this.mDescription = description;
         this.mImageUrl = imageUrl;
     }
 
@@ -37,5 +36,9 @@ public class Item {
 
     public String getImageUrl() {
         return mImageUrl;
+    }
+
+    public void setDescription(String description) {
+        this.mDescription = description;
     }
 }
