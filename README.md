@@ -6,7 +6,7 @@
 
 ## Description
 
-A marketplace app to buy and sell items, compare prices to similar items and post on similar apps and websites.
+A marketplace app to buy and sell items, compare prices to similar items sold on Walmart, and post on similar apps and websites.
 
 ## Setup
 
@@ -14,7 +14,7 @@ A marketplace app to buy and sell items, compare prices to similar items and pos
 
 * Open up Android Studios
 
-* click on File/New/Import Project... and select bit-flip from the desktop folder
+* click on 'open existing android project' and select bitflip
 
 ## Technologies Used
 
