@@ -25,9 +25,9 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     private ArrayList<Item> mItems = new ArrayList<>();
     private Context mContext;
 
-    public ItemListAdapter(Context context, ArrayList<Item> restaurants) {
+    public ItemListAdapter(Context context, ArrayList<Item> items) {
         mContext = context;
-        mItems = restaurants;
+        mItems = items;
     }
 
     @Override
@@ -61,11 +61,11 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             mContext = itemView.getContext();
         }
 
-        public void bindItem(Item restaurant) {
-            Picasso.with(mContext).load(restaurant.getImageUrl()).into(mItemImageView);
-            mNameTextView.setText(restaurant.getName());
-            mCategoryTextView.setText(restaurant.getCategory());
-            mPriceTextView.setText("$" + restaurant.getPrice());
+        public void bindItem(Item item) {
+            Picasso.with(mContext).load(item.getImageUrls().get(0)).into(mItemImageView);
+            mNameTextView.setText(item.getName());
+            mCategoryTextView.setText(item.getCategory());
+            mPriceTextView.setText("$" + item.getPrice());
         }
     }
 }

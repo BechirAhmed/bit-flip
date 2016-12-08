@@ -12,9 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.model.Item;
 import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
@@ -34,12 +37,16 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
     private String[] mCategoryArray;
 
+    private DatabaseReference ref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
         ButterKnife.bind(this);
         Resources res = getResources();
+
+        ref = FirebaseDatabase.getInstance().getReference();
 
         mCategoryArray = res.getStringArray(R.array.categories);
 
@@ -67,6 +74,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("userName", inputName);
             intent.putExtra("userEmail", inputEmail);
             intent.putExtra("userPhone", inputPhone);
+            saveItemToDatabase(newItem);
             startActivity(intent);
         } else if(v == mComparePricesButton) {
             String newItemName = mNewItemName.getText().toString();
@@ -77,5 +85,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(NewItemActivity.this, NewCategoryActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void saveItemToDatabase(Item item) {
+        ref.child(Constants.FIREBASE_CHILD_ITEMS).push().setValue(item);
     }
 }

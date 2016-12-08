@@ -42,7 +42,7 @@ public class Item {
         return description;
     }
 
-    public List<String> getImageUrl() {
+    public List<String> getImageUrls() {
         return imageUrls;
     }
 
