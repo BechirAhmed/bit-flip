@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.epicodus.bitflip.R;
+import com.epicodus.bitflip.model.Item;
+
+import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,16 +30,14 @@ public class ItemDisplayActivity extends AppCompatActivity implements View.OnCli
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String itemName = intent.getStringExtra("itemName");
-        String itemDescription = intent.getStringExtra("itemDescription");
-        int itemPrice = Integer.parseInt(intent.getStringExtra("itemPrice"));
+        Item item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
         String userName = intent.getStringExtra("userName");
         String userEmail = intent.getStringExtra("userEmail");
         String userPhone = intent.getStringExtra("userPhone");
 
-        mItemName.setText(itemName);
-        mItemDescription.setText(itemDescription);
-        mItemPrice.setText("$" + itemPrice);
+        mItemName.setText(item.getName());
+        mItemDescription.setText(item.getDescription());
+        mItemPrice.setText("$" + item.getPrice());
         mUserName.setText(userName);
         mUserEmail.setText(userEmail);
         mUserPhone.setText(userPhone);

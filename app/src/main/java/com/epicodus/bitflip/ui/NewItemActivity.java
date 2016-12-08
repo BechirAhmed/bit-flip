@@ -12,8 +12,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.bitflip.model.Item;
 import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
+
+import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,16 +54,16 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v == mNewItemButton) {
+            String newCategory = mNewItemCategory.getSelectedItem().toString();
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
             String inputName = mInputName.getText().toString();
             String inputEmail = mInputEmail.getText().toString();
             String inputPhone = mInputPhone.getText().toString();
+            Item newItem = new Item(newCategory, newItemName, newItemDescription, newItemPrice);
             Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
-            intent.putExtra("itemDescription", newItemDescription);
-            intent.putExtra("itemName", newItemName);
-            intent.putExtra("itemPrice", newItemPrice);
+            intent.putExtra("item", Parcels.wrap(newItem));
             intent.putExtra("userName", inputName);
             intent.putExtra("userEmail", inputEmail);
             intent.putExtra("userPhone", inputPhone);

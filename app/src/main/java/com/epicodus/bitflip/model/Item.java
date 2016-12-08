@@ -1,44 +1,53 @@
 package com.epicodus.bitflip.model;
 
+import org.parceler.Parcel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by DroAlvarez on 12/1/16.
  */
 
+@Parcel
 public class Item {
-    private String mCategory;
-    private String mName;
-    private String mPrice;
-    private String mDescription;
-    private String mImageUrl;
+    private String category;
+    private String name;
+    private String price;
+    private String description;
+    private List<String> imageUrls = new ArrayList<String>();
 
-    public Item(String category, String name, String price, String imageUrl) {
-        this.mCategory = category;
-        this.mName = name;
-        this.mPrice = price;
-        this.mImageUrl = imageUrl;
+    public Item(){};
+
+    public Item(String category, String name, String description, String price) {
+        this.category = category;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     public String getCategory() {
-        return mCategory;
+        return category;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public String getPrice() {
-        return mPrice;
+        return price;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public List<String> getImageUrl() {
+        return imageUrls;
     }
 
-    public void setDescription(String description) {
-        this.mDescription = description;
+    public void addImageUrl(String imageUrl) {
+        this.imageUrls.add(imageUrl);
     }
+
 }
