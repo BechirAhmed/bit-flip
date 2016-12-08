@@ -12,7 +12,7 @@ public class Constants {
     public static final String API_KEY_QUERY_PARAMETER = "apiKey";
     public static final String FORMAT_QUERY_PARAMETER = "format";
     public static final String FORMAT_QUERY_ANSWER = "json";
-    public static final String CATEGORY_URL_ADDON = "taxonomy";
     public static final String SEARCH_URL_ADDON = "search";
     public static final String SEARCH_QUERY_PARAMETER = "query";
+    public static final String FIREBASE_CHILD_CATEGORIES = "categories";
 }

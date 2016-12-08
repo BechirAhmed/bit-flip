@@ -16,6 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
 
     buildTypes.each {
@@ -35,6 +38,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.firebase:firebase-database:9.2.1'
     apt 'org.parceler:parceler:1.1.1'
     testCompile 'junit:junit:4.12'
 }
