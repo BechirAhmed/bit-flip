@@ -3,6 +3,8 @@ package com.epicodus.bitflip.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.epicodus.bitflip.R;
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     @Override
