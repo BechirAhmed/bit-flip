@@ -28,6 +28,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.inputPhone) EditText mInputPhone;
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
+    @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
     private String[] mCategoryArray;
 
     @Override
@@ -41,6 +42,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
         mNewItemButton.setOnClickListener(this);
         mComparePricesButton.setOnClickListener(this);
+        mAddCategoryButton.setOnClickListener(this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mCategoryArray);
         mNewItemCategory.setAdapter(adapter);
@@ -67,6 +69,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             String newItemName = mNewItemName.getText().toString();
             Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
             intent.putExtra("itemName", newItemName);
+            startActivity(intent);
+        } else if(v == mAddCategoryButton) {
+            Intent intent = new Intent(NewItemActivity.this, NewCategoryActivity.class);
             startActivity(intent);
         }
     }
