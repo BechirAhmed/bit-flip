@@ -25,7 +25,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:text="Jordans"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/primary"/>
 
         <TextView
             android:layout_width="wrap_content"
