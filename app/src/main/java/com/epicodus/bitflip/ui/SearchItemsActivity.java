@@ -19,5 +19,9 @@ public class SearchItemsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String query = intent.getStringExtra("query");
+
+        getItems(query);
     }
+
+    private
 }
