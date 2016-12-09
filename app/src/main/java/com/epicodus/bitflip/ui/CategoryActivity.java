@@ -32,9 +32,6 @@ public class CategoryActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Resources res = getResources();
 
-        MenuItem menuItem = menu.fi
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView()
-
         mCategoryArray = res.getStringArray(R.array.categories);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mCategoryArray);
         mCategoryList.setAdapter(adapter);
@@ -51,13 +48,15 @@ public class CategoryActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_search)
+        MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchItems(query);
+                Intent intent = new Intent(CategoryActivity.this, SearchItemsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
                 return false;
             }
 
@@ -73,5 +72,4 @@ public class CategoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
 }
