@@ -12,7 +12,7 @@
 
     <TextView
         android:text="Item Details"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:textSize="30sp"
@@ -20,28 +20,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:layout_below="@+id/inputName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/inputEmail"
-        android:hint="Email" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:layout_below="@+id/inputEmail"
-        android:layout_alignRight="@+id/inputEmail"
-        android:layout_alignEnd="@+id/inputEmail"
-        android:id="@+id/inputPhone"
-        android:hint="Phone" />
 
     <Button
         android:text="Submit"
@@ -51,14 +29,25 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/newItemButton" />
 
-    <TextView
-        android:text="User Details"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:layout_centerVertical="true"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/inputPhone"
+        android:hint="Phone"
+        android:layout_above="@+id/newItemButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/inputEmail"
+        android:hint="Email"
+        android:layout_above="@+id/inputPhone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -69,29 +58,7 @@
         android:ems="10"
         android:id="@+id/inputName"
         android:hint="Name"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/newItemDescription"
-        android:hint="Description"
-        android:layout_above="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/newItemPrice"
-        android:hint="Price (0.00)"
-        android:layout_above="@+id/newItemDescription"
+        android:layout_above="@+id/inputEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -102,46 +69,81 @@
         android:ems="10"
         android:id="@+id/newItemName"
         android:hint="Item"
-        android:layout_above="@+id/newItemPrice"
+        android:layout_below="@+id/spinnerCategory"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:id="@+id/spinnerCategory" />
-
-    <TextView
-        android:text="Category:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView6" />
-
-    <Button
-        android:text="Compare Prices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/newItemName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp"
-        android:id="@+id/comparePricesButton" />
 
     <Button
         android:text="Add Category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addCategoryButton"
-        android:layout_alignTop="@+id/spinnerCategory"
-        android:layout_alignLeft="@+id/comparePricesButton"
-        android:layout_alignStart="@+id/comparePricesButton" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCategory"
+        android:layout_alignBottom="@+id/addCategoryButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Compare Prices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/comparePricesButton"
+        android:layout_below="@+id/newItemName"
+        android:layout_alignLeft="@+id/addCategoryButton"
+        android:layout_alignStart="@+id/addCategoryButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/newItemPrice"
+        android:hint="Price (0.00)"
+        android:layout_below="@+id/newItemName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/newItemDescription"
+        android:hint="Description"
+        android:layout_below="@+id/newItemPrice"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/imageUrlEditText"
+        android:hint="Image URL"
+        android:layout_below="@+id/newItemDescription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="User Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:layout_above="@+id/inputName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
 
 
 </RelativeLayout>

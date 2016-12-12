@@ -16,24 +16,32 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.R;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CategoryActivity extends AppCompatActivity {
     @Bind(R.id.categoryList) ListView mCategoryList;
-    private String[] mCategoryArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
-        Resources res = getResources();
 
-        mCategoryArray = res.getStringArray(R.array.categories);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mCategoryArray);
+        DatabaseReference mCategoryRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
+
+        FirebaseListAdapter adapter = new FirebaseListAdapter(this, android.R.layout.simple_list_item_1, mCategoryRef) {
+            @Override
+            protected void populateView(View v, Object model, int position) {
+
+            }
+        };
         mCategoryList.setAdapter(adapter);
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

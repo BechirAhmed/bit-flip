@@ -22,10 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/itemNameTextView"
-            android:textSize="20dp"
             android:textStyle="bold"
             android:text="Jordans"
-            android:textColor="@color/primary"/>
+            android:textColor="@color/primary"
+            android:elevation="0dp" />
 
         <TextView
             android:layout_width="wrap_content"

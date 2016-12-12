@@ -32,6 +32,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.inputName) EditText mInputName;
     @Bind(R.id.inputEmail) EditText mInputEmail;
     @Bind(R.id.inputPhone) EditText mInputPhone;
+    @Bind(R.id.imageUrlEditText) EditText mImageUrl;
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
     @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
@@ -65,10 +66,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
+            String newItemImageUrl = mImageUrl.getText().toString();
             String inputName = mInputName.getText().toString();
             String inputEmail = mInputEmail.getText().toString();
             String inputPhone = mInputPhone.getText().toString();
-            Item newItem = new Item(newCategory, newItemName, newItemDescription, newItemPrice);
+            Item newItem = new Item(newCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
             Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
             intent.putExtra("item", Parcels.wrap(newItem));
             intent.putExtra("userName", inputName);

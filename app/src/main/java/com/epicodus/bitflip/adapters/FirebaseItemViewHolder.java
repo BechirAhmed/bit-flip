@@ -19,6 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by DroAlvarez on 12/8/16.
  */
@@ -26,6 +29,11 @@ import java.util.ArrayList;
 public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+
+    @Bind(R.id.itemImageView) ImageView mItemImageView;
+    @Bind(R.id.itemNameTextView) TextView mNameTextView;
+    @Bind(R.id.categoryTextView) TextView mCategoryTextView;
+    @Bind(R.id.priceTextView) TextView mPriceTextView;
 
     View mView;
     Context mContext;
@@ -38,20 +46,17 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
     }
 
     public void bindItem(Item item) {
-        ImageView itemImageView = (ImageView) mView.findViewById(R.id.itemImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.itemNameTextView);
-        TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
-        TextView priceTextView = (TextView) mView.findViewById(R.id.priceTextView);
+            ButterKnife.bind(this, mView);
 
-        Picasso.with(mContext)
-                .load(item.getImageUrls().get(0))
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(itemImageView);
+            Picasso.with(mContext)
+                    .load(item.getImageUrls().get(0))
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
+                    .into(mItemImageView);
 
-        nameTextView.setText(item.getName());
-        categoryTextView.setText(item.getCategory());
-        priceTextView.setText("$" + item.getPrice());
+            mNameTextView.setText(item.getName());
+            mCategoryTextView.setText(item.getCategory());
+            mPriceTextView.setText("$" + item.getPrice());
     }
 
     @Override

@@ -58,8 +58,7 @@ public class WalmartService {
                     String price = itemJSON.getString("salePrice");
                     String imageUrl = itemJSON.getString("thumbnailImage");
                     String description = "";
-                    Item item = new Item(category, name, description, price);
-                    item.addImageUrl(imageUrl);
+                    Item item = new Item(category, name, description, price, imageUrl);
                     items.add(item);
                 }
             }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.R;
@@ -24,6 +25,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class SearchItemsActivity extends AppCompatActivity {
+    public static final String TAG = SearchItemsActivity.class.getSimpleName();
     @Bind(R.id.searchItemsRecyclerView) RecyclerView mSearchItemsRecyclerView;
 
     private DatabaseReference mItemReference;
@@ -36,42 +38,22 @@ public class SearchItemsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String query = intent.getStringExtra("query");
+        final String query = intent.getStringExtra("query");
 
         mItemReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ITEMS);
-        findSearchedItems(query);
+        setUpFirebaseAdapter(query);
 
     }
 
-    private void findSearchedItems(final String query) {
-        mItemReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final List<Item> items = new ArrayList<Item>();
-                for(DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                    String itemName = itemSnapshot.child("name").getValue().toString();
-                    if(itemName.equals(query)) {
-                        Item item = (Item) itemSnapshot.getValue();
-                        items.add(item);
-                    }
-                }
 
-                setUpFirebaseAdapter();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void setUpFirebaseAdapter() {
+    private void setUpFirebaseAdapter(final String query) {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Item, FirebaseItemViewHolder>(Item.class, R.layout.bitflip_list_item, FirebaseItemViewHolder.class, mItemReference) {
             @Override
             protected void populateViewHolder(FirebaseItemViewHolder viewHolder, Item model, int position) {
-                viewHolder.bindItem(model);
+                Log.v(TAG, "number" + position);
+                if(model.getName().equals(query)) {
+                    viewHolder.bindItem(model);
+                }
             }
         };
         mSearchItemsRecyclerView.setHasFixedSize(true);
