@@ -16,6 +16,8 @@ import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.model.Item;
 import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,20 +64,23 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v == mNewItemButton) {
-            String newCategory = mNewItemCategory.getSelectedItem().toString();
+            String newItemCategory = mNewItemCategory.getSelectedItem().toString();
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
             String newItemImageUrl = mImageUrl.getText().toString();
-            String inputName = mInputName.getText().toString();
-            String inputEmail = mInputEmail.getText().toString();
-            String inputPhone = mInputPhone.getText().toString();
-            Item newItem = new Item(newCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
+            Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            DatabaseReference itemRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_USERS)
+                    .child(uid);
+            DatabaseReference pushRef = itemRef.push();
+            String pushId = pushRef.getKey();
+            newItem.setPushId(pushId);
+            pushRef.setValue(newItem);
             Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
-            intent.putExtra("item", Parcels.wrap(newItem));
-            intent.putExtra("userName", inputName);
-            intent.putExtra("userEmail", inputEmail);
-            intent.putExtra("userPhone", inputPhone);
             saveItemToDatabase(newItem);
             startActivity(intent);
         } else if(v == mComparePricesButton) {

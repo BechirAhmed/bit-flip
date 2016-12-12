@@ -29,18 +29,18 @@ public class ItemDisplayActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_item_display);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        Item item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
-        String userName = intent.getStringExtra("userName");
-        String userEmail = intent.getStringExtra("userEmail");
-        String userPhone = intent.getStringExtra("userPhone");
-
-        mItemName.setText(item.getName());
-        mItemDescription.setText(item.getDescription());
-        mItemPrice.setText("$" + item.getPrice());
-        mUserName.setText(userName);
-        mUserEmail.setText(userEmail);
-        mUserPhone.setText(userPhone);
+//        Intent intent = getIntent();
+//        Item item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
+//        String userName = intent.getStringExtra("userName");
+//        String userEmail = intent.getStringExtra("userEmail");
+//        String userPhone = intent.getStringExtra("userPhone");
+//
+//        mItemName.setText(item.getName());
+//        mItemDescription.setText(item.getDescription());
+//        mItemPrice.setText("$" + item.getPrice());
+//        mUserName.setText(userName);
+//        mUserEmail.setText(userEmail);
+//        mUserPhone.setText(userPhone);
 
         mUserEmail.setOnClickListener(this);
         mUserPhone.setOnClickListener(this);

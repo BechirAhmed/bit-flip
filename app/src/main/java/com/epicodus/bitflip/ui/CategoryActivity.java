@@ -36,13 +36,13 @@ public class CategoryActivity extends AppCompatActivity {
 
         DatabaseReference mCategoryRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
 
-        FirebaseListAdapter adapter = new FirebaseListAdapter(this, android.R.layout.simple_list_item_1, mCategoryRef) {
-            @Override
-            protected void populateView(View v, Object model, int position) {
-
-            }
-        };
-        mCategoryList.setAdapter(adapter);
+//        FirebaseListAdapter adapter = new FirebaseListAdapter(this, android.R.layout.simple_list_item_1, mCategoryRef) {
+//            @Override
+//            protected void populateView(View v, Object model, int position) {
+//
+//            }
+//        };
+//        mCategoryList.setAdapter(adapter);
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
