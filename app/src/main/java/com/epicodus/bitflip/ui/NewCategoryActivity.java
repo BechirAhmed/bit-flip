@@ -39,7 +39,7 @@ public class NewCategoryActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if(v == mCategoryButton) {
             String category = mAddCategoryEditText.getText().toString();
-            saveCategoryToDatabase(category);
+            mCategoryReference.child(category);
             Intent intent = new Intent(NewCategoryActivity.this, NewItemActivity.class);
             startActivity(intent);
         }

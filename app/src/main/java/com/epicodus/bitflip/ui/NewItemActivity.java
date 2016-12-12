@@ -18,6 +18,7 @@ import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -72,14 +73,19 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference itemRef = FirebaseDatabase
+            DatabaseReference categoryRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_CATEGORIES)
+                    .child(newItemCategory);
+            DatabaseReference userRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_USERS)
                     .child(uid);
-            DatabaseReference pushRef = itemRef.push();
+            DatabaseReference pushRef = userRef.push();
             String pushId = pushRef.getKey();
             newItem.setPushId(pushId);
             pushRef.setValue(newItem);
+            categoryRef.setValue(newItem);
             Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
             saveItemToDatabase(newItem);
             startActivity(intent);
@@ -97,4 +103,5 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private void saveItemToDatabase(Item item) {
         ref.child(Constants.FIREBASE_CHILD_ITEMS).push().setValue(item);
     }
+
 }
