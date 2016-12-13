@@ -47,7 +47,10 @@ public class CategoryActivity extends AppCompatActivity {
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(CategoryActivity.this, "You Picked A Category!", Toast.LENGTH_LONG).show();
+                String clickedCategory = adapterView.getItemAtPosition(i).toString();
+                Intent intent = new Intent(CategoryActivity.this, CategoryItemsActivity.class);
+                intent.putExtra("category", clickedCategory);
+                startActivity(intent);
             }
         });
     }

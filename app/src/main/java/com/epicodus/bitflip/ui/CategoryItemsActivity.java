@@ -12,20 +12,14 @@ import com.epicodus.bitflip.R;
 import com.epicodus.bitflip.adapters.FirebaseItemViewHolder;
 import com.epicodus.bitflip.model.Item;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SearchItemsActivity extends AppCompatActivity {
-    public static final String TAG = SearchItemsActivity.class.getSimpleName();
+public class CategoryItemsActivity extends AppCompatActivity {
+    public static final String TAG = CategoryItemsActivity.class.getSimpleName();
     @Bind(R.id.searchItemsRecyclerView) RecyclerView mSearchItemsRecyclerView;
 
     private DatabaseReference mItemReference;
@@ -34,26 +28,24 @@ public class SearchItemsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_items);
+        setContentView(R.layout.activity_category_items);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        final String query = intent.getStringExtra("query");
+        String category = intent.getStringExtra("category");
+        Log.v(TAG, category);
 
-        mItemReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_ITEMS);
-        setUpFirebaseAdapter(query);
+        mItemReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES).child(category);
+        setUpFirebaseAdapter();
 
     }
 
 
-    private void setUpFirebaseAdapter(final String query) {
+    private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Item, FirebaseItemViewHolder>(Item.class, R.layout.bitflip_list_item, FirebaseItemViewHolder.class, mItemReference) {
             @Override
             protected void populateViewHolder(FirebaseItemViewHolder viewHolder, Item model, int position) {
-                Log.v(TAG, "number" + position);
-                if(model.getName().equals(query)) {
-                    viewHolder.bindItem(model);
-                }
+                viewHolder.bindItem(model);
             }
         };
         mSearchItemsRecyclerView.setHasFixedSize(true);

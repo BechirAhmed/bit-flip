@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SearchItemsActivity"></activity>
+        <activity android:name=".ui.CategoryItemsActivity"></activity>
     </application>
 
 </manifest>
