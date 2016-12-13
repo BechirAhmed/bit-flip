@@ -40,9 +40,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.newItemName) EditText mNewItemName;
     @Bind(R.id.newItemPrice) EditText mNewItemPrice;
     @Bind(R.id.spinnerCategory) Spinner mNewItemCategory;
-    @Bind(R.id.inputName) EditText mInputName;
-    @Bind(R.id.inputEmail) EditText mInputEmail;
-    @Bind(R.id.inputPhone) EditText mInputPhone;
     @Bind(R.id.imageUrlEditText) EditText mImageUrl;
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
@@ -126,6 +123,18 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(NewItemActivity.this, NewCategoryActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSharedPreferences.edit().clear().commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSharedPreferences.edit().clear().commit();
     }
 
     private void saveItemToDatabase(Item item) {
