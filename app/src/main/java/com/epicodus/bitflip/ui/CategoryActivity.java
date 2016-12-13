@@ -42,24 +42,8 @@ public class CategoryActivity extends AppCompatActivity {
 
         DatabaseReference mCategoryRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
 
-        mCategoryRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<String> categories = new ArrayList<String>();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String category = snapshot.getKey();
-                    categories.add(category);
-                }
+        fillListView(mCategoryRef, "");
 
-                ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(CategoryActivity.this, android.R.layout.simple_list_item_1, categories);
-                mCategoryList.setAdapter(categoryAdapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -75,13 +59,13 @@ public class CategoryActivity extends AppCompatActivity {
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(CategoryActivity.this, SearchItemsActivity.class);
-                intent.putExtra("query", query);
-                startActivity(intent);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
+                fillListView(ref, query);
                 return false;
             }
 
@@ -96,5 +80,33 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fillListView(DatabaseReference ref, final String query) {
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> categories = new ArrayList<String>();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String category = snapshot.getKey();
+                    if(!query.equals("")) {
+                       if(category.equals(query)) {
+                           categories.add(category);
+                       }
+                    } else {
+                        categories.add(category);
+                    }
+
+                }
+
+                ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(CategoryActivity.this, android.R.layout.simple_list_item_1, categories);
+                mCategoryList.setAdapter(categoryAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
