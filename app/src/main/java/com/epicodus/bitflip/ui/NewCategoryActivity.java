@@ -1,6 +1,8 @@
 package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,18 +21,16 @@ public class NewCategoryActivity extends AppCompatActivity implements View.OnCli
     @Bind(R.id.addCategoryEditText) EditText mAddCategoryEditText;
     @Bind(R.id.categoryButton) Button mCategoryButton;
 
-    private DatabaseReference mCategoryReference;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_category);
         ButterKnife.bind(this);
 
-        mCategoryReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_CATEGORIES);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
 
         mCategoryButton.setOnClickListener(this);
     }
@@ -39,13 +39,13 @@ public class NewCategoryActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if(v == mCategoryButton) {
             String category = mAddCategoryEditText.getText().toString();
-            mCategoryReference.child(category);
+            addToSharedPreferences(category);
             Intent intent = new Intent(NewCategoryActivity.this, NewItemActivity.class);
             startActivity(intent);
         }
     }
 
-    public void saveCategoryToDatabase(String category) {
-        mCategoryReference.push().setValue(category);
+    public void addToSharedPreferences(String category) {
+        mEditor.putString(Constants.PREFERENCES_CATEGORY_KEY, category).apply();
     }
 }
