@@ -19,8 +19,14 @@ import android.widget.Toast;
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.R;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,13 +42,24 @@ public class CategoryActivity extends AppCompatActivity {
 
         DatabaseReference mCategoryRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CATEGORIES);
 
-//        FirebaseListAdapter adapter = new FirebaseListAdapter(this, android.R.layout.simple_list_item_1, mCategoryRef) {
-//            @Override
-//            protected void populateView(View v, Object model, int position) {
-//
-//            }
-//        };
-//        mCategoryList.setAdapter(adapter);
+        mCategoryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> categories = new ArrayList<String>();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String category = snapshot.getKey();
+                    categories.add(category);
+                }
+
+                ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(CategoryActivity.this, android.R.layout.simple_list_item_1, categories);
+                mCategoryList.setAdapter(categoryAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
