@@ -15,8 +15,7 @@ public class Item {
     private String price;
     private String description;
     private List<String> imageUrls = new ArrayList<String>();
-    private String userPushId;
-    private String categoryPushId;
+    private String pushId;
 
     public Item(){};
 
@@ -44,12 +43,8 @@ public class Item {
         return description;
     }
 
-    public String getUserPushId() {
-        return userPushId;
-    }
-
-    public String getCategoryPushId() {
-        return categoryPushId;
+    public String getPushId() {
+        return pushId;
     }
 
     public List<String> getImageUrls() {
@@ -60,12 +55,8 @@ public class Item {
         this.imageUrls.add(imageUrl);
     }
 
-    public void setUserPushId(String pushId) {
-        this.userPushId = pushId;
-    }
-
-    public void setCategoryPushId(String pushId) {
-        this.categoryPushId = pushId;
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
 }

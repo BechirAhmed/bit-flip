@@ -1,7 +1,9 @@
 package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,9 +47,10 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
     @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
-    private List<String> mCategoryKeyArray = new ArrayList<String>();
 
+    private SharedPreferences mSharedPreferences;
     private DatabaseReference ref;
+    private String mNewCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         ButterKnife.bind(this);
 
         ref = FirebaseDatabase.getInstance().getReference();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mNewCategory = mSharedPreferences.getString(Constants.PREFERENCES_CATEGORY_KEY, null);
+
 
         mNewItemButton.setOnClickListener(this);
         mComparePricesButton.setOnClickListener(this);
@@ -65,11 +71,12 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> categories = new ArrayList<String>();
+                if(mNewCategory != null) {
+                    categories.add(mNewCategory);
+                }
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String category = snapshot.getValue().toString();
-                    String categoryKey = snapshot.getKey().toString();
+                    String category = snapshot.getKey();
                     categories.add(category);
-                    mCategoryKeyArray.add(categoryKey);
                 }
 
                 ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(NewItemActivity.this, android.R.layout.simple_spinner_item, categories);
@@ -87,7 +94,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v == mNewItemButton) {
             String newItemCategory = mNewItemCategory.getSelectedItem().toString();
-            int categoryIndex = mNewItemCategory.getSelectedItemPosition();
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
@@ -95,23 +101,19 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            String categoryId = findCategoryId(categoryIndex);
             DatabaseReference categoryRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_CATEGORIES)
-                    .child(categoryId);
+                    .child(newItemCategory);
             DatabaseReference userRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_USERS)
                     .child(uid);
-            DatabaseReference userPushRef = userRef.push();
-            DatabaseReference categoryPushRef = categoryRef.push();
-            String categoryPushId = categoryPushRef.getKey();
-            String userPushId = userPushRef.getKey();
-            newItem.setUserPushId(userPushId);
-            newItem.setCategoryPushId(categoryPushId);
-            userPushRef.setValue(newItem);
-            categoryPushRef.setValue(newItem);
+            DatabaseReference pushRef = userRef.push();
+            String pushId = pushRef.getKey();
+            newItem.setPushId(pushId);
+            pushRef.setValue(newItem);
+            categoryRef.push().setValue(newItem);
             Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
             saveItemToDatabase(newItem);
             startActivity(intent);
@@ -129,10 +131,4 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private void saveItemToDatabase(Item item) {
         ref.child(Constants.FIREBASE_CHILD_ITEMS).push().setValue(item);
     }
-
-    private String findCategoryId(int index) {
-        String categoryKey = mCategoryKeyArray.get(index);
-        return categoryKey;
-    }
-
 }
