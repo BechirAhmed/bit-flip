@@ -9,6 +9,7 @@ import java.util.List;
  * Created by DroAlvarez on 12/1/16.
  */
 
+@Parcel
 public class Item {
     private String category;
     private String name;

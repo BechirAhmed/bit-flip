@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.model.Item;
-import com.epicodus.bitflip.ui.ItemDisplayActivity;
 import com.epicodus.bitflip.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -98,22 +97,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference categoryRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_CATEGORIES)
-                    .child(newItemCategory);
-            DatabaseReference userRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_USERS)
-                    .child(uid);
-            DatabaseReference pushRef = userRef.push();
-            String pushId = pushRef.getKey();
-            newItem.setPushId(pushId);
-            pushRef.setValue(newItem);
-            categoryRef.push().setValue(newItem);
-            Intent intent = new Intent(NewItemActivity.this, ItemDisplayActivity.class);
+            saveItemToCategory(newItemCategory, newItem);
+            saveItemToUser(uid, newItem);
             saveItemToDatabase(newItem);
-            startActivity(intent);
         } else if(v == mComparePricesButton) {
             String newItemName = mNewItemName.getText().toString();
             Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
@@ -139,5 +125,24 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
     private void saveItemToDatabase(Item item) {
         ref.child(Constants.FIREBASE_CHILD_ITEMS).push().setValue(item);
+    }
+
+    private void saveItemToCategory(String category, Item item) {
+        DatabaseReference categoryRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_CATEGORIES)
+                .child(category);
+        categoryRef.push().setValue(item);
+    }
+
+    private void saveItemToUser(String userId, Item item) {
+        DatabaseReference userRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_USERS)
+                .child(userId);
+        DatabaseReference pushRef = userRef.push();
+        String pushId = pushRef.getKey();
+        item.setPushId(pushId);
+        pushRef.setValue(item);
     }
 }
