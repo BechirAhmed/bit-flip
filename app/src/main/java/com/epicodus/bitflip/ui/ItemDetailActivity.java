@@ -1,6 +1,7 @@
 package com.epicodus.bitflip.ui;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.epicodus.bitflip.R;
+import com.epicodus.bitflip.adapters.ImagePagerAdapter;
 import com.epicodus.bitflip.model.Item;
 import com.google.firebase.database.ThrowOnExtraProperties;
 
@@ -27,8 +29,10 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     @Bind(R.id.ownerTextView) TextView mOwnerTextView;
     @Bind(R.id.emailTextView) TextView mEmailTextView;
     @Bind(R.id.emailOwnerButton) Button mEmailOwnerButton;
+    @Bind(R.id.viewPager) ViewPager mViewPager;
 
     private Item mItem;
+    private ImagePagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,10 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         mItemPriceTextView.setText("$" + mItem.getPrice());
         mOwnerTextView.setText(mItem.getOwnerName());
         mEmailTextView.setText(mItem.getOwnerEmail());
+
+        adapterViewPager = new ImagePagerAdapter(getSupportFragmentManager(), mItem.getImageUrls());
+        mViewPager.setAdapter(adapterViewPager);
+        mViewPager.setCurrentItem(0);
 
         mEmailOwnerButton.setOnClickListener(this);
     }
