@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -94,22 +95,32 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
             String newItemImageUrl = mImageUrl.getText().toString();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
-            String ownerEmail = user.getEmail();
-            String ownerName = user.getDisplayName();
-            Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl, ownerEmail, ownerName);
-            saveItemToCategory(newItemCategory, newItem);
-            saveItemToUser(uid, newItem);
-            saveItemToDatabase(newItem);
-            Intent intent = new Intent(NewItemActivity.this, MainActivity.class);
-            Toast.makeText(NewItemActivity.this, "Item saved.", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+
+            boolean validDescription = isValid(newItemDescription, mNewItemDescription);
+            boolean validName = isValid(newItemName, mNewItemName);
+            boolean validImageUrl = isValid(newItemImageUrl, mImageUrl);
+            boolean validPrice = isValid(newItemPrice, mNewItemPrice);
+
+            if(validDescription && validName && validImageUrl && validImageUrl && validPrice) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+                String ownerEmail = user.getEmail();
+                String ownerName = user.getDisplayName();
+                Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl, ownerEmail, ownerName);
+                saveItemToCategory(newItemCategory, newItem);
+                saveItemToUser(uid, newItem);
+                saveItemToDatabase(newItem);
+                Intent intent = new Intent(NewItemActivity.this, MainActivity.class);
+                Toast.makeText(NewItemActivity.this, "Item saved.", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
         } else if(v == mComparePricesButton) {
             String newItemName = mNewItemName.getText().toString();
-            Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
-            intent.putExtra("itemName", newItemName);
-            startActivity(intent);
+            if(isValid(newItemName, mNewItemName)) {
+                Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
+                intent.putExtra("itemName", newItemName);
+                startActivity(intent);
+            }
         } else if(v == mAddCategoryButton) {
             Intent intent = new Intent(NewItemActivity.this, NewCategoryActivity.class);
             startActivity(intent);
@@ -149,5 +160,13 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         String pushId = pushRef.getKey();
         item.setPushId(pushId);
         pushRef.setValue(item);
+    }
+
+    private boolean isValid(String text, EditText editText) {
+        if(text.equals("")) {
+            editText.setError("Please fill out this field.");
+            return false;
+        }
+        return true;
     }
 }
