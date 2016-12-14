@@ -102,6 +102,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             saveItemToCategory(newItemCategory, newItem);
             saveItemToUser(uid, newItem);
             saveItemToDatabase(newItem);
+            Intent intent = new Intent(NewItemActivity.this, MainActivity.class);
+            Toast.makeText(NewItemActivity.this, "Item saved.", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         } else if(v == mComparePricesButton) {
             String newItemName = mNewItemName.getText().toString();
             Intent intent = new Intent(NewItemActivity.this, ComparePricesActivity.class);
