@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.R;
 import com.epicodus.bitflip.model.Item;
+import com.epicodus.bitflip.ui.ItemDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,10 +78,10 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
                     items.add(snapshot.getValue(Item.class));
                 }
                 int itemPosition = getLayoutPosition();
+                Item item = items.get(itemPosition);
 
                 Intent intent = new Intent(mContext, ItemDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("items", Parcels.wrap(items));
+                intent.putExtra("item", Parcels.wrap(item));
 
                 mContext.startActivity(intent);
             }

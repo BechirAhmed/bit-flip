@@ -94,9 +94,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
             String newItemImageUrl = mImageUrl.getText().toString();
-            Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl);
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
+            String ownerEmail = user.getEmail();
+            String ownerName = user.getDisplayName();
+            Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl, ownerEmail, ownerName);
             saveItemToCategory(newItemCategory, newItem);
             saveItemToUser(uid, newItem);
             saveItemToDatabase(newItem);

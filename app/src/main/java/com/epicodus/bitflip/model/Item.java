@@ -16,15 +16,19 @@ public class Item {
     private String price;
     private String description;
     private List<String> imageUrls = new ArrayList<String>();
+    private String ownerName;
+    private String ownerEmail;
     private String pushId;
 
     public Item(){};
 
-    public Item(String category, String name, String description, String price, String imageUrl) {
+    public Item(String category, String name, String description, String price, String imageUrl, String ownerEmail, String ownerName) {
         this.category = category;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.ownerName = ownerName;
+        this.ownerEmail = ownerEmail;
         this.imageUrls.add(imageUrl);
     }
 
@@ -42,6 +46,12 @@ public class Item {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getOwnerName() { return ownerName; }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
     public String getPushId() {
