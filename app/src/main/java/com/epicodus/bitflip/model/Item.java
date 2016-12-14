@@ -11,14 +11,14 @@ import java.util.List;
 
 @Parcel
 public class Item {
-    private String category;
-    private String name;
-    private String price;
-    private String description;
-    private List<String> imageUrls = new ArrayList<String>();
-    private String ownerName;
-    private String ownerEmail;
-    private String pushId;
+    String category;
+    String name;
+    String price;
+    String description;
+    List<String> imageUrls = new ArrayList<String>();
+    String ownerName;
+    String ownerEmail;
+    String pushId;
 
     public Item(){};
 
