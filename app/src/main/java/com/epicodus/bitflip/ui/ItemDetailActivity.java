@@ -3,6 +3,7 @@ package com.epicodus.bitflip.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ItemDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
     @Bind(R.id.itemCategoryTextView) TextView mItemCategoryTextView;
     @Bind(R.id.itemDescriptionTextView) TextView mItemDescriptionTextView;
@@ -37,5 +38,21 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mItem = Parcels.unwrap(intent.getParcelableExtra("item"));
+
+        mItemNameTextView.setText(mItem.getName());
+        mItemCategoryTextView.setText(mItem.getCategory());
+        mItemDescriptionTextView.setText(mItem.getDescription());
+        mItemPriceTextView.setText("$" + mItem.getPrice());
+        mOwnerTextView.setText(mItem.getOwnerName());
+        mEmailTextView.setText(mItem.getOwnerEmail());
+
+        mEmailOwnerButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mEmailOwnerButton) {
+
+        }
     }
 }
