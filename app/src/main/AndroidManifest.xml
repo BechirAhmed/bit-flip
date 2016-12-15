@@ -18,7 +18,7 @@
             android:name=".ui.NewItemActivity"
             android:parentActivityName=".ui.MainActivity" />
         <activity
-            android:name=".ui.ItemDisplayActivity"
+            android:name=".ui.ItemDetailActivity"
             android:parentActivityName=".ui.NewItemActivity" />
         <activity
             android:name=".ui.ComparePricesActivity"
@@ -32,8 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CategoryItemsActivity" />
-        <activity android:name=".ui.ItemDetailActivity" />
+        <activity
+            android:name=".ui.CategoryItemsActivity"
+            android:parentActivityName=".ui.CategoryActivity"/>
         <activity android:name=".ui.EmailOwnerActivity"></activity>
     </application>
 
