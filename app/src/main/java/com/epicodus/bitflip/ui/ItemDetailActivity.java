@@ -60,9 +60,14 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v == mEmailOwnerButton) {
-            Intent intent = new Intent(ItemDetailActivity.this, EmailOwnerActivity.class);
-            intent.putExtra("email", mItem.getOwnerEmail());
-            startActivity(intent);
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            String title = "Email with: ";
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {mItem.getOwnerEmail()});
+            Intent chooser = Intent.createChooser(emailIntent, title);
+            if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(chooser);
+            }
         }
     }
 }

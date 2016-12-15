@@ -35,7 +35,6 @@
         <activity
             android:name=".ui.CategoryItemsActivity"
             android:parentActivityName=".ui.CategoryActivity"/>
-        <activity android:name=".ui.EmailOwnerActivity"></activity>
     </application>
 
 </manifest>
