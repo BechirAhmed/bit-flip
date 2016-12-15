@@ -23,7 +23,9 @@
         <activity
             android:name=".ui.ComparePricesActivity"
             android:parentActivityName=".ui.NewItemActivity" />
-        <activity android:name=".ui.NewCategoryActivity" />
+        <activity
+            android:name=".ui.NewCategoryActivity"
+            android:parentActivityName=".ui.NewItemActivity"/>
         <activity android:name=".ui.CreateAccountActivity" />
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
