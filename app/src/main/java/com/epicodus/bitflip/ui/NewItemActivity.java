@@ -47,7 +47,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.newItemName) EditText mNewItemName;
     @Bind(R.id.newItemPrice) EditText mNewItemPrice;
     @Bind(R.id.spinnerCategory) Spinner mNewItemCategory;
-    @Bind(R.id.imageUrlEditText) EditText mImageUrl;
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
     @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
@@ -101,19 +100,17 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             String newItemDescription = mNewItemDescription.getText().toString();
             String newItemName = mNewItemName.getText().toString();
             String newItemPrice = mNewItemPrice.getText().toString();
-            String newItemImageUrl = mImageUrl.getText().toString();
 
             boolean validDescription = isValid(newItemDescription, mNewItemDescription);
             boolean validName = isValid(newItemName, mNewItemName);
-            boolean validImageUrl = isValid(newItemImageUrl, mImageUrl);
             boolean validPrice = isValid(newItemPrice, mNewItemPrice);
 
-            if(validDescription && validName && validImageUrl && validImageUrl && validPrice) {
+            if(validDescription && validName && validPrice) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String uid = user.getUid();
                 String ownerEmail = user.getEmail();
                 String ownerName = user.getDisplayName();
-                Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, newItemImageUrl, ownerEmail, ownerName);
+                Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, ownerEmail, ownerName);
                 saveItemToCategory(newItemCategory, newItem);
                 saveItemToUser(uid, newItem);
                 saveItemToDatabase(newItem);
@@ -209,5 +206,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             encodeBitmapAndDisplay(imageBitmap);
         }
+    }
+
+    public void encodeBitmapAndDisplay(Bitmap bitmap) {
+
     }
 }

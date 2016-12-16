@@ -22,14 +22,13 @@ public class Item {
 
     public Item(){};
 
-    public Item(String category, String name, String description, String price, String imageUrl, String ownerEmail, String ownerName) {
+    public Item(String category, String name, String description, String price, String ownerEmail, String ownerName) {
         this.category = category;
         this.name = name;
         this.description = description;
         this.price = price;
         this.ownerName = ownerName;
         this.ownerEmail = ownerEmail;
-        this.imageUrls.add(imageUrl);
     }
 
     public String getCategory() {
