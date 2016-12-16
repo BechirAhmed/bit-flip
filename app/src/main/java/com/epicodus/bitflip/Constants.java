@@ -18,4 +18,6 @@ public class Constants {
     public static final String FIREBASE_CHILD_ITEMS = "items";
     public static final String FIREBASE_CHILD_USERS = "users";
     public static final String PREFERENCES_CATEGORY_KEY = "category";
+    public static final String KEY_SOURCE = "source";
+    public static final String SOURCE_SAVED = "saved";
 }
