@@ -2,8 +2,11 @@ package com.epicodus.bitflip.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcel;
 import org.parceler.Parcels;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -55,11 +59,20 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
     public void bindItem(Item item) {
         ButterKnife.bind(this, mView);
 
-        Picasso.with(mContext)
-                .load(item.getImageUrls().get(0))
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(mItemImageView);
+        if(!item.getImageUrls().get(0).contains("http")) {
+            try {
+                Bitmap image = decodeFromBase64(item.getImageUrls().get(0));
+                mItemImageView.setImageBitmap(image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Picasso.with(mContext)
+                    .load(item.getImageUrls().get(0))
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
+                    .into(mItemImageView);
+        }
 
         mNameTextView.setText(item.getName());
         mCategoryTextView.setText(item.getCategory());
@@ -91,5 +104,10 @@ public class FirebaseItemViewHolder extends RecyclerView.ViewHolder implements V
 
             }
         });
+    }
+
+    public static Bitmap decodeFromBase64(String image) throws IOException {
+        byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
     }
 }
