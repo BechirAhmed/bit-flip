@@ -22,7 +22,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="150dp"
             android:background="@android:color/white"
             android:paddingTop="20dp"
             android:paddingLeft="10dp"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="$5.00"
                 android:id="@+id/itemPriceTextView"
-                android:layout_alignTop="@+id/itemNameTextView"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/colorAccent"
@@ -106,7 +106,6 @@
             android:layout_height="wrap_content"
             android:text="Email Owner"
             android:id="@+id/emailOwnerButton"
-            android:layout_alignParentBottom="true"
             android:background="@color/colorAccent"
             android:textColor="@color/icons"
             android:textSize="15sp" />
