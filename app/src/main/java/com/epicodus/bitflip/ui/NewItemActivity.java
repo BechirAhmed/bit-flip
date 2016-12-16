@@ -7,8 +7,10 @@ import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.bitflip.Constants;
+import com.epicodus.bitflip.adapters.ImagePagerAdapter;
 import com.epicodus.bitflip.model.Item;
 import com.epicodus.bitflip.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,11 +37,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener{
     static final int REQUEST_IMAGE_CAPTURE = 111;
@@ -50,10 +56,13 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.newItemButton) Button mNewItemButton;
     @Bind(R.id.comparePricesButton) Button mComparePricesButton;
     @Bind(R.id.addCategoryButton) Button mAddCategoryButton;
+    @Bind(R.id.imageViewPager) ViewPager mImageViewPager;
 
     private SharedPreferences mSharedPreferences;
     private DatabaseReference ref;
     private String mNewCategory;
+    private List<String> mImages;
+    private ImagePagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         ref = FirebaseDatabase.getInstance().getReference();
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mNewCategory = mSharedPreferences.getString(Constants.PREFERENCES_CATEGORY_KEY, null);
+        mImages = new ArrayList<String>();
 
 
         mNewItemButton.setOnClickListener(this);
@@ -209,6 +219,14 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void encodeBitmapAndDisplay(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+        Log.v("IMHERE", "MADEIT");
+        mImages.add(imageEncoded);
 
+        adapterViewPager = new ImagePagerAdapter(getSupportFragmentManager(), mImages);
+        mImageViewPager.setAdapter(adapterViewPager);
+        mImageViewPager.setCurrentItem(0);
     }
 }

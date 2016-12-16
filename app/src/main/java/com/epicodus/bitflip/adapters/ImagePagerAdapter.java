@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.epicodus.bitflip.ui.ItemDetailFragment;
+import com.epicodus.bitflip.ui.NewImageFragment;
 
 import java.util.List;
 
@@ -22,7 +23,12 @@ public class ImagePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ItemDetailFragment.newInstance(mImageUrls.get(position));
+        if(mImageUrls.get(0).contains("http")) {
+            return ItemDetailFragment.newInstance(mImageUrls.get(position));
+        } else {
+            return NewImageFragment.newInstance(mImageUrls.get(position));
+        }
+
     }
 
     @Override
