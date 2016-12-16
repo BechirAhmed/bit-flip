@@ -53,6 +53,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
+        setHasOptionsMenu(true);
         ButterKnife.bind(this);
 
         ref = FirebaseDatabase.getInstance().getReference();
