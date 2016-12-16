@@ -121,6 +121,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 String ownerEmail = user.getEmail();
                 String ownerName = user.getDisplayName();
                 Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, ownerEmail, ownerName);
+                if(!mImages.isEmpty()) {
+                    for(int i = 0; i < mImages.size(); i++) {
+                        newItem.addImageUrl(mImages.get(i));
+                    }
+                }
                 saveItemToCategory(newItemCategory, newItem);
                 saveItemToUser(uid, newItem);
                 saveItemToDatabase(newItem);
