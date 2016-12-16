@@ -10,29 +10,30 @@ import com.epicodus.bitflip.ui.NewImageFragment;
 import java.util.List;
 
 /**
- * Created by DroAlvarez on 12/13/16.
+ * Created by DroAlvarez on 12/16/16.
  */
 
-public class ImagePagerAdapter extends FragmentPagerAdapter {
-    private List<String> mImageUrls;
+public class NewImagePagerAdapter extends FragmentPagerAdapter{
+    private List<String> mImages;
 
-    public ImagePagerAdapter(FragmentManager fm, List<String> imageUrls) {
+    public NewImagePagerAdapter(FragmentManager fm, List<String> images) {
         super(fm);
-        mImageUrls = imageUrls;
+        mImages = images;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ItemDetailFragment.newInstance(mImageUrls.get(position));
+        return NewImageFragment.newInstance(mImages.get(position));
     }
 
     @Override
     public int getCount() {
-        return mImageUrls.size();
+        return mImages.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mImageUrls.get(position);
+        return mImages.get(position);
     }
 }
+

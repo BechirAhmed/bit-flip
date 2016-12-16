@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.epicodus.bitflip.Constants;
 import com.epicodus.bitflip.adapters.ImagePagerAdapter;
+import com.epicodus.bitflip.adapters.NewImagePagerAdapter;
 import com.epicodus.bitflip.model.Item;
 import com.epicodus.bitflip.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference ref;
     private String mNewCategory;
     private List<String> mImages;
-    private ImagePagerAdapter adapterViewPager;
+    private NewImagePagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,7 +231,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         Log.v("IMHERE", "MADEIT");
         mImages.add(imageEncoded);
 
-        adapterViewPager = new ImagePagerAdapter(getSupportFragmentManager(), mImages);
+        adapterViewPager = new NewImagePagerAdapter(getSupportFragmentManager(), mImages);
         mImageViewPager.setAdapter(adapterViewPager);
         mImageViewPager.setCurrentItem(0);
     }

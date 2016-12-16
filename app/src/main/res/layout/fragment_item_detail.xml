@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.epicodus.bitflip.ui.ItemDetailFragment">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="211dp"
-            android:id="@+id/itemImageView"
-            android:src="@drawable/jordans"
-            android:scaleType="centerCrop" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:id="@+id/itemImageView"
+        android:src="@drawable/jordans"
+        android:scaleType="centerCrop" />
 
 </FrameLayout>
