@@ -1,6 +1,6 @@
 # BitFlip
 
-#### Epicodus Android solo project
+#### Marketplace App For Android
 
 #### By Sandro Alvarez
 
@@ -14,11 +14,13 @@ A marketplace app to buy and sell items, compare prices to similar items sold on
 
 * Open up Android Studios
 
-* click on 'open existing android project' and select bitflip
+* click on 'open existing android project' and select bit-flip
 
 ## Technologies Used
 
 * Android
+
+* Android Studios
 
 ## Support
 
