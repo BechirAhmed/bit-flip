@@ -228,7 +228,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        Log.v("IMHERE", "MADEIT");
         mImages.add(imageEncoded);
 
         adapterViewPager = new NewImagePagerAdapter(getSupportFragmentManager(), mImages);

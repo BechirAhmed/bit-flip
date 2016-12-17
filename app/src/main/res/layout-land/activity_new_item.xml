@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_item"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.epicodus.bitflip.ui.NewItemActivity">
+
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <TextView
+                android:text="Item Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:textSize="30sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:text="Category: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="14dp"
+                android:id="@+id/textView3" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/newItemDescription"
+                android:hint="Description"
+                android:layout_below="@+id/newItemPrice"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerCategory"
+                android:layout_alignBottom="@+id/addCategoryButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/newItemName"
+                android:hint="Item"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/addCategoryButton"
+                android:layout_toStartOf="@+id/addCategoryButton" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/newItemPrice"
+                android:hint="Price (0.00)"
+                android:layout_below="@+id/newItemName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:text="Add Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addCategoryButton"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/textView3"
+                android:layout_toRightOf="@+id/textView3"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="70dp"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:text="Compare Prices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comparePricesButton"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/addCategoryButton"
+                android:layout_alignRight="@+id/addCategoryButton"
+                android:layout_alignEnd="@+id/addCategoryButton"
+                android:layout_alignParentRight="true"/>
+
+            <Button
+                android:text="Flip!"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorSell"
+                android:textColor="@android:color/white"
+                android:id="@+id/newItemButton"
+                android:elevation="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+
+        <View android:background="@color/colorAccent"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/imageViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+        </android.support.v4.view.ViewPager>
+
+</LinearLayout>
