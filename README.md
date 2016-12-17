@@ -6,7 +6,7 @@
 
 ## Description
 
-A marketplace app to buy and sell items, compare prices to similar items sold on Walmart, and post on similar apps and websites.
+A marketplace app to buy and sell items, compare prices to similar items sold on Walmart, and contact owners for purchasing.
 
 ## Setup
 
