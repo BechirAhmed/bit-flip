@@ -62,7 +62,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private SharedPreferences mSharedPreferences;
     private DatabaseReference ref;
     private String mNewCategory;
-    private List<String> mImages;
+    private ArrayList<Bitmap> mImages;
     private NewImagePagerAdapter adapterViewPager;
 
     @Override
@@ -71,11 +71,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_new_item);
         ButterKnife.bind(this);
 
+        mImages = new ArrayList<Bitmap>();
+
         ref = FirebaseDatabase.getInstance().getReference();
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mNewCategory = mSharedPreferences.getString(Constants.PREFERENCES_CATEGORY_KEY, null);
-        mImages = new ArrayList<String>();
-
 
         mNewItemButton.setOnClickListener(this);
         mComparePricesButton.setOnClickListener(this);
@@ -124,7 +124,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 Item newItem = new Item(newItemCategory, newItemName, newItemDescription, newItemPrice, ownerEmail, ownerName);
                 if(!mImages.isEmpty()) {
                     for(int i = 0; i < mImages.size(); i++) {
-                        newItem.addImageUrl(mImages.get(i));
+                        Bitmap image = mImages.get(i);
+                        String encodedImage = encodeBitmap(image);
+                        newItem.addImageUrl(encodedImage);
                     }
                 }
                 saveItemToCategory(newItemCategory, newItem);
@@ -220,17 +222,32 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            encodeBitmapAndDisplay(imageBitmap);
+            mImages.add(imageBitmap);
+            adaptImages(mImages);
         }
     }
 
-    public void encodeBitmapAndDisplay(Bitmap bitmap) {
+    public String encodeBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        mImages.add(imageEncoded);
+        return imageEncoded;
+    }
 
-        adapterViewPager = new NewImagePagerAdapter(getSupportFragmentManager(), mImages);
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelableArrayList("imageBitmaps", mImages);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mImages = savedInstanceState.getParcelableArrayList("imageBitmaps");
+        adaptImages(mImages);
+    }
+
+    private void adaptImages(ArrayList<Bitmap> images) {
+        adapterViewPager = new NewImagePagerAdapter(getSupportFragmentManager(), images);
         mImageViewPager.setAdapter(adapterViewPager);
         mImageViewPager.setCurrentItem(0);
     }

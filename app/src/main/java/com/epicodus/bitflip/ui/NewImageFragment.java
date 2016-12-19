@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import com.epicodus.bitflip.R;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import butterknife.Bind;
@@ -24,12 +27,16 @@ import butterknife.ButterKnife;
  */
 public class NewImageFragment extends Fragment {
     @Bind(R.id.newItemImageView) ImageView mNewItemImageView;
-    private String mImageByte;
+    private byte[] mImageByte;
+    Bitmap mImage;
 
-    public static NewImageFragment newInstance(String imageByte) {
+    public static NewImageFragment newInstance(Bitmap imageBitmap) {
         Bundle args = new Bundle();
         NewImageFragment fragment = new NewImageFragment();
-        args.putString("imageByte", imageByte);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] byteArray = baos.toByteArray();
+        args.putByteArray("imageByte", byteArray);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +47,7 @@ public class NewImageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mImageByte = getArguments().getString("imageByte");
+        mImageByte = getArguments().getByteArray("imageByte");
     }
 
     @Override
@@ -49,18 +56,11 @@ public class NewImageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_image, container, false);
         ButterKnife.bind(this, view);
 
-        try {
-            Bitmap image = decodeFromBase64(mImageByte);
-            mNewItemImageView.setImageBitmap(image);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mImage = BitmapFactory.decodeByteArray(mImageByte, 0, mImageByte.length);
+        mNewItemImageView.setImageBitmap(mImage);
+
         return view;
     }
 
-    public static Bitmap decodeFromBase64(String image) throws IOException {
-        byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.epicodus.bitflip.adapters;
 
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,9 +15,9 @@ import java.util.List;
  */
 
 public class NewImagePagerAdapter extends FragmentPagerAdapter{
-    private List<String> mImages;
+    private List<Bitmap> mImages;
 
-    public NewImagePagerAdapter(FragmentManager fm, List<String> images) {
+    public NewImagePagerAdapter(FragmentManager fm, List<Bitmap> images) {
         super(fm);
         mImages = images;
     }
@@ -31,9 +32,4 @@ public class NewImagePagerAdapter extends FragmentPagerAdapter{
         return mImages.size();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mImages.get(position);
-    }
 }
-
